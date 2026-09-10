@@ -45,6 +45,19 @@ Step 2 - Add your secrets file:
     src/main.py loads this file automatically on startup via python-dotenv,
     so both the CLI and the GUI pick these values up.
 
+Step 3 - *** IMPORTANT *** Add the severe injury data file:
+
+    data/severe_injury_data.json is REQUIRED for the app to run, but it is
+    NOT included in this git repository (it's ~110 MB, over GitHub's 100 MB
+    file size limit, so it's listed in .gitignore).
+
+    Before running the app, download this file and place it at:
+
+        data/severe_injury_data.json
+
+    Without this file, src/vector_store.py cannot build (or load the cache
+    for) the severe injury vector store, and the app will fail to start.
+
 --------------------------------------------------------------------------------
  3. HOW TO RUN THE APP
 --------------------------------------------------------------------------------
@@ -162,6 +175,9 @@ To stop the app, either press Ctrl+C in the terminal, or click the
 
 - "OPENAI_API_KEY" errors: make sure src/API.ENV exists and contains a
   valid key, and that you're running the app from the project root.
+- File not found / can't load severe injury data: make sure
+  data/severe_injury_data.json has been downloaded and placed in the data/
+  folder (see section 2, Step 3) -- it is not included in the git repo.
 - First run is slow / seems stuck: this is expected -- check the terminal
   (CLI) or the "Startup log" box (GUI) for embedding progress messages.
 - Want to force a rebuild of the embeddings: delete the relevant cache

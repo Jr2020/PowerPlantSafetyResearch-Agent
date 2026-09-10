@@ -1,6 +1,9 @@
 # Secrets
 src/API.ENV
 
+# Source data (large, not distributed via git)
+data/severe_injury_data.json
+
 # Generated embeddings cache (large, rebuildable from data/severe_injury_data.json)
 data/severe_injury_embeddings_cache/
 
