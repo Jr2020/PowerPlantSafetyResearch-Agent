@@ -1,0 +1,15 @@
+# Secrets
+src/API.ENV
+
+# Generated embeddings cache (large, rebuildable from data/severe_injury_data.json)
+data/severe_injury_embeddings_cache/
+
+# Generated embeddings cache (large, rebuildable from the source PDFs in data/)
+data/pdf_embeddings_cache/
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

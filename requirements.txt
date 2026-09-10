@@ -1,0 +1,27 @@
+# Core LangChain stack
+langchain-core==1.6.0
+langchain-openai==1.6.0
+langchain-text-splitters==1.1.2
+
+# LangGraph's prebuilt ReAct agent loop (create_react_agent), used in main.py
+# instead of a hand-rolled Thought/Action/Observation loop
+langgraph==1.2.11
+
+# LangSmith tracing (activated via LANGCHAIN_TRACING_V2 in API.ENV)
+langsmith==0.11.1
+
+# Secrets/config loading from API.ENV
+python-dotenv==1.2.3
+
+# Data handling
+numpy==2.5.1
+pydantic==2.13.4
+
+# PDF text extraction (pdf_vector_store.py)
+pymupdf==1.28.2
+
+# Offline reverse geocoding (get_location_from_coordinates in main.py)
+reverse_geocoder==1.5.1
+
+# Chat GUI (gradio_app.py)
+gradio==6.26.0

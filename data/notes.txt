@@ -1,0 +1,427 @@
+Data is Publicly accessible.
+
+Most of the data was either queried from public sources on power plant locations and names.
+Also pulled some data from OSHA as safety guidelines from the USA are easily accesible online.
+Took some liberties in how the data was interpreted.
+Sever injury data was also pulled from public sources.
+
+https://www.osha.gov/laws-regs/federalregister/2014-04-11
+
+Use this promp and answer for the DEMO
+
+user: Give me the power plant with the most Megawatts in the united states.
+
+assistant: <details>
+<summary>Reasoning (2 tool calls)</summary>
+
+Thought: You want the single US power plant with the largest nameplate capacity (MW). I'll query the power plant database for all US plants and identify the one with the highest capacity from those results. I'll start by querying the database with no filters to retrieve plants (the dataset is US-only).
+
+---
+
+**Tool call:** `query_power_plant_database()`
+
+```text
+[USA0059371] 12 Applegate Solar LLC | Allentown, New Jersey, United States of America | Solar | 1.9 MW | commissioned: 2012.0 | lat/long: 40.2003, -74.5761
+[USA0060858] 126 Grove Solar LLC | Franklin, Massachusetts, United States of America | Solar | 2.0 MW | commissioned: 2012.0 | lat/long: 42.0761, -71.4227
+[USA0057310] 1420 Coil Av #C | Carson, California, United States of America | Solar | 1.3 MW | commissioned: 2011.0 | lat/long: 33.7943, -118.2414
+[USA0057458] 145 Talmadge Solar | Edison, New Jersey, United States of America | Solar | 3.8 MW | commissioned: 2011.0 | lat/long: 40.5358, -74.3913
+[USA0007770] 1515 S Caron Road | Rochelle, Illinois, United States of America | Gas | 4.2 MW | commissioned: 2000.0 | lat/long: 41.9084, -89.0466
+[USA0060542] 158th Fighter Wing Solar Farm | South Burlington, Vermont, United States of America | Solar | 1.3 MW | commissioned: 2011.0 | lat/long: 44.4777, -73.1534
+[USA0058187] 180 Raritan Solar | Fords, New Jersey, United States of America | Solar | 1.9 MW | commissioned: 2012.0 | lat/long: 40.5161, -74.34
+[USA0054818] 191 Peachtree Tower | Atlanta, Georgia, United States of America | Oil | 2.4 MW | commissioned: 1991.0 | lat/long: 33.7583, -84.3869
+[USA0059822] 201 Sturbridge B | Brimfield, Massachusetts, United States of America | Solar | 2.0 MW | commissioned: 2014.0 | lat/long: 42.1091, -72.1712
+[USA0059821] 205 Sturbridge A | Brimfield, Massachusetts, United States of America | Solar | 3.0 MW | commissioned: 2014.0 | lat/long: 42.1093, -72.1705
+[USA0058918] 2081 Terzian Solar Project | Minkler, California, United States of America | Solar | 1.2 MW | commissioned: 2014.0 | lat/long: 36.67, -119.4158
+[USA0058920] 2097 Helton Solar Project | Merced, California, United States of America | Solar | 1.5 MW | commissioned: 2014.0 | lat/long: 37.3522, -120.5069
+[USA0058919] 2127 Harris Solar Project | Live Oak, California, United States of America | Solar | 1.3 MW | commissioned: 2014.0 | lat/long: 39.2917, -121.6697
+[USA0061195] 231 Dixon 74 Solar I  LLC | White Plains, North Carolina, United States of America | Solar | 2.0 MW | commissioned: 2017.0 | lat/long: 35.2441, -81.4304
+[USA0059365] 24 Applegate Solar LLC | Allentown, New Jersey, United States of America | Solar | 4.9 MW | commissioned: 2014.0 | lat/long: 40.2058, -74.5797
+[USA0057871] 2555 E Olympic Bl | Boyle Heights, California, United States of America | Solar | 1.0 MW | commissioned: 2012.0 | lat/long: 34.0269, -118.2242
+[USA0059485] 265 Pleasant Solar NG  LLC | Lunenburg, Massachusetts, United States of America | Solar | 2.2 MW | commissioned: 2014.0 | lat/long: 42.5814, -71.7622
+[USA0061518] 301 Chestnut Solar NG | East Longmeadow, Massachusetts, United States of America | Solar | 4.3 MW | commissioned: 2017.0 | lat/long: 42.0552, -72.5218
+[USA0061224] 350 Clark Solar  NG  LLC | Stanhope, New Jersey, United States of America | Solar | 1.8 MW | commissioned: 2011.0 | lat/long: 40.8942, -74.7302
+[USA0059370] 4 Applegate Solar LLC | Allentown, New Jersey, United States of America | Solar | 1.8 MW | commissioned: 2012.0 | lat/long: 40.1964, -74.5836
+[USA0061237] 433 Purchase Solar NG  LLC | Swansea, Massachusetts, United States of America | Solar | 2.5 MW | commissioned: 2012.0 | lat/long: 41.8094, -71.1922
+[USA0058455] 45 Mile Hydroelectric Project | Culver, Oregon, United States of America | Hydro | 3.0 MW | commissioned: 2015.0 | lat/long: 44.5281, -121.1528
+[USA0007268] 491 E 48th Street | Holland, Michigan, United States of America | Gas | 161.7 MW | commissioned: 1996.1311069882504 | lat/long: 42.7553, -86.0853
+[USA0059534] 4Oaks | Four Oaks, North Carolina, United States of America | Solar | 5.0 MW | commissioned: 2015.0 | lat/long: 35.4325, -78.4117
+[USA0057640] 500 Virginia Solar | Fort Washington, Pennsylvania, United States of America | Solar | 1.0 MW | commissioned: 2011.0 | lat/long: 40.1392, -75.1917
+[USA0056196] 500MW CC | Manhattan, New York, United States of America | Gas | 528.0 MW | commissioned: 2006.0 | lat/long: 40.7889, -73.9069
+[USA0057363] 510 REPP One | Gaston, North Carolina, United States of America | Solar | 1.3 MW | commissioned: 2014.0 | lat/long: 36.4972, -77.6058
+[USA0002503] 59th Street | Guttenberg, New Jersey, United States of America | Gas | 17.1 MW | commissioned: 1969.0 | lat/long: 40.7713, -73.9912
+[USA0059046] 651 Chase Solar NG | Lunenburg, Massachusetts, United States of America | Solar | 2.5 MW | commissioned: 2014.0 | lat/long: 42.6267, -71.7428
+[USA0002504] 74th Street | Manhattan, New York, United States of America | Oil | 37.0 MW | commissioned: 1968.0 | lat/long: 40.768, -73.9515
+[USA0052162] 85 A | Tehachapi, California, United States of America | Wind | 14.1 MW | commissioned: 1985.0 | lat/long: 35.1011, -118.3372
+[USA0052163] 85 B | Tehachapi, California, United States of America | Wind | 21.2 MW | commissioned: 1985.0 | lat/long: 35.1011, -118.3372
+[USA0003272] 99 Islands | Blacksburg, South Carolina, United States of America | Hydro | 18.0 MW | commissioned: 1910.0 | lat/long: 35.0314, -81.4936
+[USA0006137] A B Brown | Henderson, Kentucky, United States of America | Coal | 706.8000000000002 MW | commissioned: 1985.9940577249567 | lat/long: 37.9053, -87.715
+[USA0000293] A G Wishon | Auberry, California, United States of America | Hydro | 12.8 MW | commissioned: 1910.0 | lat/long: 37.151, -119.5047
+[USA0006635] A L Pierce | Wallingford, Connecticut, United States of America | Gas | 84.0 MW | commissioned: 2007.0 | lat/long: 41.4482, -72.8349
+[WRI1026808] A.E.S. Corp. | Jobos, Guayama, United States of America | Coal | 454.3 MW | commissioned: unknown | lat/long: 17.9474, -66.1494
+[USA0056076] ABC Coke | Tarrant, Alabama, United States of America | Gas | 3.8 MW | commissioned: 1997.0 | lat/long: 33.5828, -86.7799
+[USA0061525] ABD Farms | Franklinville, North Carolina, United States of America | Solar | 5.0 MW | commissioned: 2018.0 | lat/long: 35.7287, -79.7483
+[USA0058699] ABEC Bidart-Old River LLC | Greenfield, California, United States of America | Biomass | 2.0 MW | commissioned: 2014.0 | lat/long: 35.1697, -119.1056
+[USA0058798] AC Criminal Courts Complex SPE2  LLC | Mays Landing, New Jersey, United States of America | Solar | 1.3 MW | commissioned: 2013.0 | lat/long: 39.4375, -74.6906
+[USA0057845] AC Landfill Energy LLC | Pleasantville, New Jersey, United States of America | Waste | 5.4 MW | commissioned: 2005.0 | lat/long: 39.4175, -74.5422
+[USA0060802] ACCC Mays Landing | Mays Landing, New Jersey, United States of America | Solar | 1.4 MW | commissioned: 2013.0 | lat/long: 39.4606, -74.6809
+[USA0061247] ACE-Stanton A PV | Alafaya, Florida, United States of America | Solar | 4.1 MW | commissioned: 2017.0 | lat/long: 28.4845, -81.1741
+[USA0061246] ACE-Stanton PV | Alafaya, Florida, United States of America | Solar | 4.8 MW | commissioned: 2017.0 | lat/long: 28.4774, -81.1804
+[USA0057938] ADA Carbon Solutions Red River | Coushatta, Louisiana, United States of America | Cogeneration | 20.8 MW | commissioned: 2011.0 | lat/long: 32.0039, -93.3911
+[USA0060184] ADS Renewable Energy-Wolf Creek LLC | Jeffersonville, Georgia, United States of America | Waste | 2.8 MW | commissioned: 2011.0 | lat/long: 32.7755, -83.4348
+[USA0060618] AEP Bluffton NaS | Bluffton, Ohio, United States of America | Storage | 2.0 MW | commissioned: 2009.0 | lat/long: 40.8928, -83.8863
+[USA0060617] AEP Churubusco NaS | Churubusco, Indiana, United States of America | Storage | 2.0 MW | commissioned: 2009.0 | lat/long: 41.2326, -85.3149
+[USA0061388] AEP Jacksonville Solar Project | Nassau Village-Ratliff, Florida, United States of America | Solar | 7.1 MW | commissioned: 2017.0 | lat/long: 30.5236, -81.6864
+[USA0059995] AEP Milton NaS | Milton, West Virginia, United States of America | Storage | 2.0 MW | commissioned: 2009.0 | lat/long: 38.3622, -82.1256
+[USA0060811] AES ADA Energy Storage Array | Audubon, Pennsylvania, United States of America | Storage | 2.0 MW | commissioned: 2013.0 | lat/long: 40.1218, -75.4172
+[USA0000315] AES Alamitos LLC | Rossmoor, California, United States of America | Gas | 1922.0 MW | commissioned: 1962.6524453694071 | lat/long: 33.7688, -118.1009
+[USA0010673] AES Hawaii | Makakilo City, Hawaii, United States of America | Coal | 203.0 MW | commissioned: 1992.0 | lat/long: 21.3034, -158.1065
+[USA0000335] AES Huntington Beach LLC | Huntington Beach, California, United States of America | Gas | 436.0 MW | commissioned: 1958.5 | lat/long: 33.6439, -117.9792
+[WRI1026807] AES Ilumina | Jobos, Guayama, United States of America | Solar | 24.0 MW | commissioned: unknown | lat/long: 17.9468, -66.1591
+[USA0000994] AES Petersburg | Petersburg, Indiana, United States of America | Coal | 2154.8 MW | commissioned: 1976.7577501392238 | lat/long: 38.5281, -87.2525
+[USA0000356] AES Redondo Beach LLC | Redondo Beach, California, United States of America | Gas | 1316.4 MW | commissioned: 1964.1485870556064 | lat/long: 33.8504, -118.395
+[USA0010671] AES Shady Point LLC | Panama, Oklahoma, United States of America | Coal | 350.0 MW | commissioned: 1990.0 | lat/long: 35.1931, -94.6458
+[USA0010678] AES Warrior Run Cogeneration Facility | Wiley Ford, West Virginia, United States of America | Coal | 229.0 MW | commissioned: 1999.0 | lat/long: 39.5952, -78.7453
+[USA0059949] AES Warrior Run Energy Storage Project | Wiley Ford, West Virginia, United States of America | Storage | 11.0 MW | commissioned: 2016.0 | lat/long: 39.5931, -78.7453
+[USA0057554] AFA Solar Farm | Air Force Academy, Colorado, United States of America | Solar | 5.5 MW | commissioned: 2011.0 | lat/long: 38.9579, -104.8066
+[USA0060986] AIS Solar Project | Leominster, Massachusetts, United States of America | Solar | 2.5 MW | commissioned: 2017.0 | lat/long: 42.5019, -71.7378
+[USA0055672] AL Sandersville LLC | Sparks, Georgia, United States of America | Gas | 692.0 MW | commissioned: 2002.0 | lat/long: 33.1189, -82.8608
+[USA0058344] AM Best Farm | Goldsboro, North Carolina, United States of America | Solar | 5.0 MW | commissioned: 2013.0 | lat/long: 35.4189, -77.9856
+[USA0056018] AMEA Peaking | Mignon, Alabama, United States of America | Gas | 98.6 MW | commissioned: 2004.0 | lat/long: 33.1661, -86.2825
+[USA0058082] AMP Napoleon Solar Facility | Napoleon, Ohio, United States of America | Solar | 3.5 MW | commissioned: 2012.0 | lat/long: 41.4067, -84.1108
+[USA0060680] ANAD Solar Array | Bynum, Alabama, United States of America | Solar | 7.4 MW | commissioned: 2017.0 | lat/long: 33.6267, -85.9695
+[USA0055211] ANP Bellingham Energy Project | Bellingham, Massachusetts, United States of America | Gas | 578.0 MW | commissioned: 2002.5 | lat/long: 42.1106, -71.4535
+[USA0055212] ANP Blackstone Energy Project | Blackstone, Massachusetts, United States of America | Gas | 578.0 MW | commissioned: 2001.0 | lat/long: 42.0599, -71.5158
+[USA0059610] AP North Lake I  LP | Hemet, California, United States of America | Solar | 20.0 MW | commissioned: 2015.0 | lat/long: 33.74, -117.0106
+[USA0061282] APG Combined Heat and Power Plant | Edgewood, Maryland, United States of America | Gas | 7.9 MW | commissioned: 2017.0 | lat/long: 39.3975, -76.2991
+[USA0058889] ASTI | Cloverdale, California, United States of America | Solar | 1.0 MW | commissioned: 2009.0 | lat/long: 38.7614, -122.9753
+[USA0061154] AT&T Anaheim | Anaheim, California, United States of America | Gas | 1.3 MW | commissioned: 2016.0 | lat/long: 33.8364, -117.9169
+[USA0061153] AT&T Holger | Milpitas, California, United States of America | Gas | 1.3 MW | commissioned: 2016.0 | lat/long: 37.4176, -121.9445
+[USA0057378] AV Solar Ranch One | Green Valley, California, United States of America | Solar | 253.0 MW | commissioned: 2014.0 | lat/long: 34.7803, -118.4244
+[USA0060085] AVS Lancaster 1 | Lancaster, California, United States of America | Solar | 3.7 MW | commissioned: 2017.0 | lat/long: 34.7489, -117.9736
+[USA0003581] Abbott TP 3 | McQueeney, Texas, United States of America | Hydro | 2.8 MW | commissioned: 1927.0 | lat/long: 29.594, -98.0407
+[USA0003338] Aberdeen CT | Aberdeen, South Dakota, United States of America | Gas | 111.0 MW | commissioned: 2003.918918918919 | lat/long: 45.4299, -98.494
+[USA0007789] Abiquiu Dam | Santa Teresa, New Mexico, United States of America | Hydro | 15.6 MW | commissioned: 1993.230769230769 | lat/long: 36.2399, -106.423
+[USA0055173] Acadia Energy Center | Eunice, Louisiana, United States of America | Gas | 1389.1999999999996 MW | commissioned: 2002.0 | lat/long: 30.4286, -92.4131
+[USA0059543] Acton Solar Landfill | Acton, Massachusetts, United States of America | Solar | 1.6 MW | commissioned: 2014.0 | lat/long: 42.4733, -71.4306
+[USA0058632] Actus Lend Lease DMAFB | Tucson, Arizona, United States of America | Solar | 3.0 MW | commissioned: 2010.0 | lat/long: 32.1825, -110.8633
+[USA0058270] Acushnet AD Makepeace | West Wareham, Massachusetts, United States of America | Solar | 4.7 MW | commissioned: 2012.0 | lat/long: 41.7989, -70.7436
+[USA0058271] Acushnet Hawes Reed Road | Head of Westport, Massachusetts, United States of America | Solar | 1.0 MW | commissioned: 2012.0 | lat/long: 41.6622, -71.0425
+[USA0059128] Acushnet- High Hill | Freetown, Massachusetts, United States of America | Solar | 3.2 MW | commissioned: 2013.0 | lat/long: 41.7144, -70.9972
+[USA0059121] Acushnet-Braley Road 1 | Freetown, Massachusetts, United States of America | Solar | 1.9 MW | commissioned: 2013.0 | lat/long: 41.7517, -70.9706
+[USA0010819] Ada Cogeneration LP | Forest Hills, Michigan, United States of America | Gas | 33.1 MW | commissioned: 1990.0 | lat/long: 42.9627, -85.4941
+[USA0050433] Ada Dam | Forest Hills, Michigan, United States of America | Hydro | 1.4 MW | commissioned: 1984.0 | lat/long: 42.9506, -85.4859
+[USA0056810] Adair Wind Farm | Greenfield, Iowa, United States of America | Wind | 174.8 MW | commissioned: 2009.0 | lat/long: 41.4236, -94.665
+[USA0060772] Adams Ave MS and HS | Pleasantville, New Jersey, United States of America | Solar | 3.1 MW | commissioned: 2011.5806451612905 | lat/long: 39.4114, -74.5309
+[USA0059850] Adams Community Solar Garden III LLC | Bennett, Colorado, United States of America | Solar | 1.2 MW | commissioned: 2015.0 | lat/long: 39.7867, -104.5877
+[USA0059849] Adams Community Solar Garden LLC | Bennett, Colorado, United States of America | Solar | 1.2 MW | commissioned: 2015.0 | lat/long: 39.7876, -104.5859
+[USA0059775] Adams Farm Solar | Athol, Massachusetts, United States of America | Solar | 3.0 MW | commissioned: 2013.0 | lat/long: 42.6, -72.2
+[USA0059637] Adams Wind | Corning, Iowa, United States of America | Wind | 154.3 MW | commissioned: 2015.6889176928062 | lat/long: 40.92, -94.6717
+[USA0056307] Adams Wind Farm | Grand Meadow, Minnesota, United States of America | Wind | 24.0 MW | commissioned: 2003.416666666667 | lat/long: 43.5548, -92.7241
+[USA0057375] Adams Wind Generations LLC | Hector, Minnesota, United States of America | Wind | 20.0 MW | commissioned: 2011.0 | lat/long: 44.9169, -94.7356
+[USA0059441] Adelanto Solar  LLC | Adelanto, California, United States of America | Solar | 20.0 MW | commissioned: 2015.0 | lat/long: 34.5572, -117.3775
+[USA0059440] Adelanto Solar II  LLC | Adelanto, California, United States of America | Solar | 7.0 MW | commissioned: 2015.0 | lat/long: 34.5572, -117.3775
+[USA0057305] Adelanto Solar Project | Adelanto, California, United States of America | Solar | 10.0 MW | commissioned: 2012.0 | lat/long: 34.5508, -117.4353
+[USA0060027] Adera Solar | Chowchilla, California, United States of America | Solar | 20.0 MW | commissioned: 2016.0 | lat/long: 37.1206, -120.3249
+[USA0058136] Adkins Energy LLC | Lena, Illinois, United States of America | Gas | 5.0 MW | commissioned: 2002.0 | lat/long: 42.3622, -89.8036
+[USA0057811] Adobe San Jose | San Jose, California, United States of America | Gas | 1.2000000000000002 MW | commissioned: 2010.0 | lat/long: 37.3306, -121.8931
+[USA0001956] Adrian | Adrian, Minnesota, United States of America | Oil | 2.0 MW | commissioned: 2005.0 | lat/long: 43.6371, -95.9328
+[USA0054903] Adrian Energy Associates LLC | Adrian, Michigan, United States of America | Waste | 2.4000000000000004 MW | commissioned: 1995.0 | lat/long: 41.891, -83.9929
+[USA0059788] Advance Stores Company  Inc | Hazardville, Connecticut, United States of America | Solar | 1.0 MW | commissioned: 2014.0 | lat/long: 42.015, -72.5119
+[USA0056225] Aeolus Wind Facility | Gruver, Texas, United States of America | Wind | 3.0 MW | commissioned: 2004.0 | lat/long: 36.4725, -101.3278
+[USA0055184] Aera San Ardo Cogen Facility | Lake Nacimiento, California, United States of America | Gas | 6.2 MW | commissioned: 1989.0 | lat/long: 35.9533, -120.86
+[USA0057697] Aerojet I | Folsom, California, United States of America | Solar | 3.0 MW | commissioned: 2010.0 | lat/long: 38.6135, -121.1629
+[USA0057698] Aerojet II | Folsom, California, United States of America | Solar | 2.7 MW | commissioned: 2010.0 | lat/long: 38.6086, -121.1703
+[USA0055210] Afton Generating Station | San Miguel, New Mexico, United States of America | Gas | 287.0 MW | commissioned: 2003.91637630662 | lat/long: 32.1142, -106.8465
+[USA0055576] Agassiz Beach LLC | Hawley, Minnesota, United States of America | Wind | 1.9 MW | commissioned: 2001.0 | lat/long: 47.0053, -96.4356
+[USA0059028] Agawam Solar | Agawam, Massachusetts, United States of America | Solar | 1.5 MW | commissioned: 2012.0 | lat/long: 42.0819, -72.6144
+[USA0050748] Agnews Power Plant | Milpitas, California, United States of America | Gas | 32.0 MW | commissioned: 1990.0 | lat/long: 37.4058, -121.9272
+[USA0059181] AgriReNew | Durant, Iowa, United States of America | Biomass | 1.0 MW | commissioned: 2013.0 | lat/long: 41.6919, -90.8664
+[USA0010593] Agrilectric Power Partners Ltd | Lake Charles, Louisiana, United States of America | Waste | 12.1 MW | commissioned: 1984.0 | lat/long: 30.2012, -93.1269
+[USA0054452] Agrium Kenai Nitrogen Operations | Nikiski, Alaska, United States of America | Gas | 12.5 MW | commissioned: 1977.0 | lat/long: 60.6732, -151.3784
+[USA0056408] Agriwind | Princeton, Illinois, United States of America | Wind | 8.4 MW | commissioned: 2007.0 | lat/long: 41.3017, -89.6236
+[USA0057373] Agua Caliente Solar Project | Wellton, Arizona, United States of America | Solar | 347.7 MW | commissioned: 2013.0871440897326 | lat/long: 32.9774, -113.4945
+[USA0000141] Agua Fria | Peoria, Arizona, United States of America | Gas | 613.5000000000001 MW | commissioned: 1964.571312143439 | lat/long: 33.5561, -112.2153
+[USA0055951] Agua Mansa Power Plant | Highgrove, California, United States of America | Gas | 60.5 MW | commissioned: 2003.0 | lat/long: 34.0414, -117.3603
+[WRI1028012] Aguirre | Central Aguirre, Salinas, United States of America | Gas | 42.0 MW | commissioned: unknown | lat/long: 17.9533, -66.2312
+[WRI1026809] Aguirre | Central Aguirre, Salinas, United States of America | Oil | 1492.0 MW | commissioned: 1975.0 | lat/long: 17.9519, -66.2308
+[USA0052158] Aidlin Geothermal Power Plant | Cloverdale, California, United States of America | Geothermal | 25.0 MW | commissioned: 1989.0 | lat/long: 38.8339, -122.881
+[USA0056162] Ainsworth Wind | Ainsworth, Nebraska, United States of America | Wind | 59.4 MW | commissioned: 2005.0 | lat/long: 42.4489, -99.8917
+[USA0055309] Air Products Port Arthur | Port Arthur, Texas, United States of America | Gas | 169.10000000000005 MW | commissioned: 2006.0236546422232 | lat/long: 29.8665, -93.9651
+[USA0059807] Airport 1 Solar (DIA) | Lochbuie, Colorado, United States of America | Solar | 1.5 MW | commissioned: 2010.0 | lat/long: 39.8994, -104.6753
+[USA0007995] Airport Industrial | Pueblo, Colorado, United States of America | Oil | 10.0 MW | commissioned: 2002.0 | lat/long: 38.2844, -104.5308
+[USA0060288] Ajax Solar | Red Springs, North Carolina, United States of America | Solar | 5.0 MW | commissioned: 2017.0 | lat/long: 34.8309, -79.1194
+[USA0054265] Akron Recycle Energy Plant | Akron, Ohio, United States of America | Gas | 4.0 MW | commissioned: 1979.0 | lat/long: 41.0733, -81.5306
+[USA0058980] Akron WRF | Fairlawn, Ohio, United States of America | Biomass | 1.7999999999999998 MW | commissioned: 2014.0 | lat/long: 41.1533, -81.5689
+[USA0010549] Al Turi | Mechanicstown, New York, United States of America | Waste | 2.4000000000000004 MW | commissioned: 2006.6666666666665 | lat/long: 41.4043, -74.3767
+[USA0054429] Alabama Pine Pulp | Frisco City, Alabama, United States of America | Biomass | 69.0 MW | commissioned: 1991.0 | lat/long: 31.5825, -87.4889
+[USA0010216] Alabama River Pulp | Frisco City, Alabama, United States of America | Biomass | 48.0 MW | commissioned: 1978.0 | lat/long: 31.5825, -87.4889
+[USA0007450] Alameda | Oakland, California, United States of America | Gas | 54.8 MW | commissioned: 1986.0 | lat/long: 37.7886, -122.2889
+[USA0000905] Alamo | Lebec, California, United States of America | Hydro | 19.6 MW | commissioned: 1986.0 | lat/long: 34.8158, -118.6867
+[USA0059206] Alamo 6 | McCamey, Texas, United States of America | Solar | 105.0 MW | commissioned: 2017.0 | lat/long: 30.9931, -102.2708
+[USA0059469] Alamo Solar | Adelanto, California, United States of America | Solar | 20.0 MW | commissioned: 2015.0 | lat/long: 34.6822, -117.3475
+[USA0057577] Alamogordo Solar Energy Center | Alamogordo, New Mexico, United States of America | Solar | 5.0 MW | commissioned: 2011.0 | lat/long: 32.8657, -105.9998
+[USA0000464] Alamosa | Alamosa, Colorado, United States of America | Gas | 53.2 MW | commissioned: 1975.0 | lat/long: 37.4594, -105.8947
+[USA0002113] Albany | Albany, Missouri, United States of America | Oil | 6.2 MW | commissioned: 1974.1774193548388 | lat/long: 40.245, -94.339
+[USA0060340] Albany Green Energy | Albany, Georgia, United States of America | Waste | 54.5 MW | commissioned: 2017.0 | lat/long: 31.5559, -84.1103
+[USA0059453] Albany Medical Ctr Cogen Plant | Albany, New York, United States of America | Gas | 4.6 MW | commissioned: 2013.0 | lat/long: 42.655, -73.7777
+[USA0060519] Albany Solar | Albany, Minnesota, United States of America | Solar | 10.0 MW | commissioned: 2017.0 | lat/long: 45.6413, -94.5993
+[USA0056339] Albemarle Hospital Unit | Albemarle, North Carolina, United States of America | Oil | 1.8 MW | commissioned: 2006.0 | lat/long: 35.3636, -80.1939
+[USA0056263] Albemarle Prime Power Park | Badin, North Carolina, United States of America | Oil | 3.6 MW | commissioned: 2006.0 | lat/long: 35.4072, -80.1518
+[USA0058806] Albemarle Solar Center LLC | Kinston, North Carolina, United States of America | Solar | 5.0 MW | commissioned: 2015.0 | lat/long: 35.2931, -77.5569
+[USA0000851] Albeni Falls | Newport, Washington, United States of America | Hydro | 42.0 MW | commissioned: 1955.0 | lat/long: 48.1802, -116.9986
+[USA0059901] Albertson Solar LLC | Beulaville, North Carolina, United States of America | Solar | 5.0 MW | commissioned: 2015.0 | lat/long: 35.093, -77.8127
+[USA0007924] Albertville | Guntersville, Alabama, United States of America | Oil | 4.0 MW | commissioned: 2000.0 | lat/long: 34.3634, -86.2239
+[USA0057567] Albuquerque Solar Energy Center | North Valley, New Mexico, United States of America | Solar | 2.0 MW | commissioned: 2011.0 | lat/long: 35.169, -106.6
+[USA0001693] Alcona | Sand Lake, Michigan, United States of America | Hydro | 8.0 MW | commissioned: 1924.0 | lat/long: 44.562, -83.8045
+[USA0006409] Alcova | Mills, Wyoming, United States of America | Hydro | 41.4 MW | commissioned: 1955.0 | lat/long: 42.5484, -106.7175
+[USA0056223] Alden Bailey Power Plant | Cathlamet, Washington, United States of America | Gas | 10.9 MW | commissioned: 2002.0 | lat/long: 46.1584, -123.406
+[USA0003913] Alder | Eatonville, Washington, United States of America | Hydro | 50.0 MW | commissioned: 1946.5 | lat/long: 46.8016, -122.3102
+[USA0058519] Alethea I | Mount Holly, New Jersey, United States of America | Solar | 2.8 MW | commissioned: 2011.0 | lat/long: 40.0006, -74.735
+[USA0004060] Alexander | Merrill, Wisconsin, United States of America | Hydro | 4.199999999999998 MW | commissioned: 1925.0 | lat/long: 45.1875, -89.7553
+[USA0058666] Alexander Wind Farm LLC | La Crosse, Kansas, United States of America | Wind | 50.7 MW | commissioned: 2016.0 | lat/long: 38.4247, -99.5075
+[USA0001958] Alexandria | Alexandria, Minnesota, United States of America | Oil | 9.2 MW | commissioned: 1964.521739130435 | lat/long: 45.8892, -95.3797
+[USA0002475] Algodones | San Felipe Pueblo, New Mexico, United States of America | Gas | 45.0 MW | commissioned: 1955.666666666667 | lat/long: 35.3844, -106.4642
+[USA0001120] Algona | Algona, Iowa, United States of America | Oil | 16.1 MW | commissioned: 1982.3229813664593 | lat/long: 43.0733, -94.2392
+[USA0057564] Algonquin Power Sanger LLC | Sanger, California, United States of America | Gas | 61.5 MW | commissioned: 2008.8130081300808 | lat/long: 36.6842, -119.5522
+[USA0060242] Algonquin SKIC 10 Solar  LLC | Maricopa, California, United States of America | Solar | 10.0 MW | commissioned: 2017.0 | lat/long: 35.1261, -119.2434
+[USA0059412] Algonquin SKIC20 Solar LLC | Maricopa, California, United States of America | Solar | 20.0 MW | commissioned: 2015.0 | lat/long: 35.1261, -119.2433
+[USA0010567] Algonquin Windsor Locks | Windsor Locks, Connecticut, United States of America | Gas | 71.0 MW | commissioned: 1994.6478873239441 | lat/long: 41.9227, -72.6255
+[USA0054391] Alice Falls Hydro Project | Keeseville, New York, United States of America | Hydro | 2.1 MW | commissioned: 1991.0 | lat/long: 44.5192, -73.4648
+[USA0000760] Allatoona | Emerson, Georgia, United States of America | Hydro | 86.6 MW | commissioned: 1950.0 | lat/long: 34.1637, -84.7282
+[USA0001694] Allegan Dam | Allegan, Michigan, United States of America | Hydro | 2.6 MW | commissioned: 1939.6153846153852 | lat/long: 42.5638, -85.954
+[USA0007784] Allegany Cogen | Houghton, New York, United States of America | Gas | 67.0 MW | commissioned: 1994.0 | lat/long: 42.5027, -78.0686
+[USA0055710] Allegheny Energy Units 3 4 & 5 | Lower Burrell, Pennsylvania, United States of America | Gas | 556.0 MW | commissioned: 2003.0 | lat/long: 40.5453, -79.7686
+[USA0050897] Allegheny Hydro No 8 | Kittanning, Pennsylvania, United States of America | Hydro | 13.6 MW | commissioned: 1991.0 | lat/long: 40.8966, -79.479
+[USA0050898] Allegheny Hydro No 9 | West Hills, Pennsylvania, United States of America | Hydro | 17.8 MW | commissioned: 1991.0 | lat/long: 40.956, -79.5507
+[USA0050894] Allegheny No 6 Hydro Station | Ford City, Pennsylvania, United States of America | Hydro | 9.2 MW | commissioned: 1988.0 | lat/long: 40.7164, -79.5772
+[USA0050893] Allegheny No. 5 Hydro Station | Freeport, Pennsylvania, United States of America | Hydro | 9.2 MW | commissioned: 1988.0 | lat/long: 40.6829, -79.6653
+[USA0056451] Allegheny Ridge Wind Farm | Cresson, Pennsylvania, United States of America | Wind | 80.0 MW | commissioned: 2007.0 | lat/long: 40.3839, -78.5794
+[USA0003393] Allen | West Memphis, Arkansas, United States of America | Coal | 1610.8000000000006 MW | commissioned: 1963.772783709956 | lat/long: 35.0741, -90.1487
+[USA0001915] Allen S King | Bayport, Minnesota, United States of America | Coal | 598.4 MW | commissioned: 1958.0 | lat/long: 45.03, -92.7786
+[USA0058706] Allendale Biomass | Allendale, South Carolina, United States of America | Waste | 22.5 MW | commissioned: 2013.0 | lat/long: 32.995, -81.2819
+[USA0056215] Allendorf | Sibley, Iowa, United States of America | Wind | 3.8 MW | commissioned: 2000.6315789473686 | lat/long: 43.4, -95.6333
+[USA0002540] Allens Falls | Hannawa Falls, New York, United States of America | Hydro | 4.0 MW | commissioned: 1927.0 | lat/long: 44.6603, -74.8603
+[USA0057581] Allenwood | Montgomery, Pennsylvania, United States of America | Waste | 3.2 MW | commissioned: 2012.0 | lat/long: 41.1511, -76.9178
+[USA0052031] Alliance Refinery | Barataria, Louisiana, United States of America | Gas | 25.0 MW | commissioned: 1985.68 | lat/long: 29.6833, -89.975
+[USA0055135] Alliant Energy Neenah | Neenah, Wisconsin, United States of America | Gas | 371.0 MW | commissioned: 2000.0 | lat/long: 44.1936, -88.5064
+[USA0054714] Alliant SBD 8501 Aegon LI | Hiawatha, Iowa, United States of America | Oil | 3.1 MW | commissioned: 1985.7096774193549 | lat/long: 42.0243, -91.704
+[USA0054720] Alliant SBD 8601 Quad Graphics | Marengo, Iowa, United States of America | Oil | 3.6 MW | commissioned: 1990.4444444444448 | lat/long: 41.7958, -92.0592
+[USA0054716] Alliant SBD 8602 Marion Sub | Marion, Iowa, United States of America | Oil | 5.6 MW | commissioned: 1986.0 | lat/long: 42.0289, -91.5975
+[USA0054717] Alliant SBD 9106 Rockwell CR | Cedar Rapids, Iowa, United States of America | Oil | 15.999999999999998 MW | commissioned: 1992.0000000000007 | lat/long: 42.0356, -91.6458
+[USA0054715] Alliant SBD 9107 JBS USA | Marshalltown, Iowa, United States of America | Oil | 11.4 MW | commissioned: 1994.947368421053 | lat/long: 42.056, -92.8971
+[USA0054712] Alliant SBD 9201 Norplex | Postville, Iowa, United States of America | Oil | 2.1 MW | commissioned: 2000.9047619047612 | lat/long: 43.0906, -91.5542
+[USA0054719] Alliant SBD 9203 Profol | Cedar Rapids, Iowa, United States of America | Oil | 5.6 MW | commissioned: 2003.321428571429 | lat/long: 41.935, -91.6361
+[USA0054710] Alliant SBD 9205 A Y McDonald | Asbury, Iowa, United States of America | Oil | 3.6 MW | commissioned: 1994.861111111111 | lat/long: 42.4906, -90.745
+[USA0054718] Alliant SBD 9206 Donaldson | Cresco, Iowa, United States of America | Oil | 1.6 MW | commissioned: 1995.0 | lat/long: 43.3744, -92.1331
+[USA0054735] Alliant SBD 9301 Prairie Farms | Dubuque, Iowa, United States of America | Oil | 2.9000000000000004 MW | commissioned: 1994.896551724138 | lat/long: 42.53, -90.6847
+[USA0054967] Alliant SBD 9302 Aegon NP | Hiawatha, Iowa, United States of America | Oil | 1.2 MW | commissioned: 1995.0 | lat/long: 42.0264, -91.7042
+[USA0054929] Alliant SBD 9403 Aegon DC | Ely, Iowa, United States of America | Oil | 4.1 MW | commissioned: 2002.6829268292686 | lat/long: 41.9167, -91.6542
+[USA0054968] Alliant SBD 9502 Eaton | Belmond, Iowa, United States of America | Oil | 5.4 MW | commissioned: 1997.333333333333 | lat/long: 42.8381, -93.6033
+[USA0056074] Alliant SBD 9901 Wells Fargo | Ely, Iowa, United States of America | Oil | 1.1 MW | commissioned: 2001.0 | lat/long: 41.9244, -91.6385
+[USA0055996] Alliant SBD0201 Ingredion | Cedar Rapids, Iowa, United States of America | Oil | 6.1 MW | commissioned: 2003.0 | lat/long: 41.9701, -91.6662
+[USA0056073] Alliant SBG 9802 Toyota | Hiawatha, Iowa, United States of America | Gas | 1.0 MW | commissioned: 1999.0 | lat/long: 42.0277, -91.7111
+[USA0058982] Allison Creek Hydro | Valdez, Alaska, United States of America | Hydro | 6.5 MW | commissioned: 2016.0 | lat/long: 61.0844, -146.3533
+... 8488 more matches not shown (8688 total). Narrow the filters to see more of the list, or use count_power_plants if you just need the total/breakdown.
+```
+
+---
+
+Thought: To be certain which US plant has the highest capacity, I'll query for plants with very large minimum capacity (>=2000 MW) to capture any above AES Petersburg's 2154.8 MW, then narrow if necessary. I'll call the database with min_capacity_mw=2000.
+
+---
+
+**Tool call:** `query_power_plant_database(min_capacity_mw=2000)`
+
+```text
+[USA0000994] AES Petersburg | Petersburg, Indiana, United States of America | Coal | 2154.8 MW | commissioned: 1976.7577501392238 | lat/long: 38.5281, -87.2525
+[USA0000003] Barry | Mount Vernon, Alabama, United States of America | Gas | 2569.4999999999995 MW | commissioned: 1980.9023545436855 | lat/long: 31.0069, -88.0103
+[USA0006167] Bath County | Warm Springs, Virginia, United States of America | Hydro | 2862.0 MW | commissioned: 1986.0 | lat/long: 38.2089, -79.8
+[USA0008042] Belews Creek | Walnut Cove, North Carolina, United States of America | Coal | 2491.2 MW | commissioned: 1975.0 | lat/long: 36.2811, -80.0603
+[USA0000703] Bowen | Euharlee, Georgia, United States of America | Coal | 3498.6 MW | commissioned: 1973.402332361516 | lat/long: 34.1256, -84.9222
+[USA0006022] Braidwood Generation Station | Braidwood, Illinois, United States of America | Nuclear | 2449.8 MW | commissioned: 1988.0 | lat/long: 41.2435, -88.2286
+[USA0000046] Browns Ferry | Trinity, Alabama, United States of America | Nuclear | 3494.0 MW | commissioned: 1975.351459645106 | lat/long: 34.7042, -87.1189
+[USA0006014] Brunswick Nuclear | Southport, North Carolina, United States of America | Nuclear | 2003.2 MW | commissioned: 1976.0 | lat/long: 33.9597, -78.0114
+[USA0006023] Byron Generating Station | Byron, Illinois, United States of America | Nuclear | 2449.8 MW | commissioned: 1986.0 | lat/long: 42.0742, -89.2819
+[USA0006036] Catawba | Tega Cay, South Carolina, United States of America | Nuclear | 2410.2 MW | commissioned: 1985.5 | lat/long: 35.0514, -81.0694
+[USA0001571] Chalk Point LLC | Golden Beach, Maryland, United States of America | Gas | 2553.0 MW | commissioned: 1976.6067371719546 | lat/long: 38.5444, -76.6861
+[USA0003921] Chief Joseph | Bridgeport, Washington, United States of America | Hydro | 2456.1999999999994 MW | commissioned: 1965.7936650109928 | lat/long: 47.9951, -119.6404
+[USA0006076] Colstrip | Colstrip, Montana, United States of America | Coal | 2272.0 MW | commissioned: 1982.006161971831 | lat/long: 45.8831, -106.614
+[USA0006145] Comanche Peak | Glen Rose, Texas, United States of America | Nuclear | 2430.0 MW | commissioned: 1991.5 | lat/long: 32.2984, -97.7855
+[USA0000130] Cross | Bonneau Beach, South Carolina, United States of America | Coal | 2390.1 MW | commissioned: 1998.953725785532 | lat/long: 33.3715, -80.1132
+[USA0000628] Crystal River | Inglis, Florida, United States of America | Coal | 2442.7 MW | commissioned: 1977.2348630613665 | lat/long: 28.9656, -82.6977
+[USA0003399] Cumberland (TN) | Erin, Tennessee, United States of America | Coal | 2600.0 MW | commissioned: 1973.0 | lat/long: 36.3903, -87.6539
+[USA0006099] Diablo Canyon | Los Osos, California, United States of America | Nuclear | 2323.0 MW | commissioned: 1985.5010761945762 | lat/long: 35.2115, -120.8555
+[USA0006000] Donald C Cook | Bridgman, Michigan, United States of America | Nuclear | 2285.3 MW | commissioned: 1976.4877259003194 | lat/long: 41.9756, -86.5652
+[USA0000869] Dresden Generating Station | Channahon, Illinois, United States of America | Nuclear | 2018.6 MW | commissioned: 1970.5 | lat/long: 41.39, -88.27
+[USA0000026] E C Gaston | Wilsonville, Alabama, United States of America | Gas | 2034.0 MW | commissioned: 1967.0312684365783 | lat/long: 33.2442, -86.4581
+[USA0006094] FirstEnergy Bruce Mansfield | Industry, Pennsylvania, United States of America | Coal | 2741.100000000001 MW | commissioned: 1977.6666666666665 | lat/long: 40.6348, -80.4159
+[USA0003944] FirstEnergy Harrison Power Station | Shinnston, West Virginia, United States of America | Coal | 2052.0 MW | commissioned: 1974.0 | lat/long: 39.3842, -80.3325
+[USA0002866] FirstEnergy W H Sammis | New Cumberland, West Virginia, United States of America | Coal | 2468.1 MW | commissioned: 1966.8079899517847 | lat/long: 40.5317, -80.6319
+[USA0000612] Fort Myers | Tice, Florida, United States of America | Gas | 2680.9 MW | commissioned: 1995.0605766720125 | lat/long: 26.6967, -81.7831
+[USA0008102] Gavin Power  LLC | Point Pleasant, West Virginia, United States of America | Coal | 2600.0 MW | commissioned: 1974.5 | lat/long: 38.9347, -82.1158
+[USA0001356] Ghent | Vevay, Indiana, United States of America | Coal | 2225.9 MW | commissioned: 1978.9986073049106 | lat/long: 38.7497, -85.035
+[USA0006113] Gibson | Mount Carmel, Illinois, United States of America | Coal | 3339.5 MW | commissioned: 1978.0 | lat/long: 38.3722, -87.7658
+[USA0006163] Grand Coulee | Coulee Dam, Washington, United States of America | Hydro | 6809.0 MW | commissioned: 1967.470333382288 | lat/long: 47.9575, -118.9773
+[USA0007873] H L Culbreath Bayside Power Station | Palm River-Clair Mel, Florida, United States of America | Gas | 2294.0000000000005 MW | commissioned: 1993.1023539668695 | lat/long: 27.9072, -82.4231
+[USA0007302] Hines Energy Complex | Fort Meade, Florida, United States of America | Gas | 2263.0 MW | commissioned: 2004.1323464427749 | lat/long: 27.7882, -81.87
+[USA0003122] Homer City Generating Station | Black Lick, Pennsylvania, United States of America | Coal | 2012.0 MW | commissioned: 1971.751491053678 | lat/long: 40.5128, -79.1961
+[USA0000710] Jack McDonough | Vinings, Georgia, United States of America | Gas | 2603.6 MW | commissioned: 2010.6835151328928 | lat/long: 33.8239, -84.4758
+[USA0006002] James H Miller Jr | Graysville, Alabama, United States of America | Coal | 2822.0 MW | commissioned: 1985.75 | lat/long: 33.6319, -87.0597
+[USA0006068] Jeffrey Energy Center | Saint Marys, Kansas, United States of America | Coal | 2160.0 MW | commissioned: 1980.333333333333 | lat/long: 39.2865, -96.1172
+[USA0008066] Jim Bridger | Rock Springs, Wyoming, United States of America | Coal | 2441.9 MW | commissioned: 1976.249109300136 | lat/long: 41.7378, -108.7875
+[USA0003082] John Day | Goldendale, Washington, United States of America | Hydro | 2160.0 MW | commissioned: 1969.5 | lat/long: 45.7164, -120.6941
+[USA0003935] John E Amos | Nitro, West Virginia, United States of America | Coal | 2932.6 MW | commissioned: 1972.1649389620127 | lat/long: 38.4731, -81.8233
+[USA0006026] LaSalle Generating Station | Seneca, Illinois, United States of America | Nuclear | 2340.0 MW | commissioned: 1984.0 | lat/long: 41.2455, -88.6691
+[USA0002103] Labadie | Gray Summit, Missouri, United States of America | Coal | 2389.4 MW | commissioned: 1971.5395915292545 | lat/long: 38.5622, -90.8377
+[USA0000613] Lauderdale | Broadview Park, Florida, United States of America | Gas | 2258.3 MW | commissioned: 1999.7447194792544 | lat/long: 26.0686, -80.1984
+[USA0006105] Limerick | Sanatoga, Pennsylvania, United States of America | Nuclear | 2277.0 MW | commissioned: 1988.0 | lat/long: 40.2243, -75.5874
+[USA0006042] Manatee | Sun City Center, Florida, United States of America | Oil | 2951.1999999999994 MW | commissioned: 1988.6185958254268 | lat/long: 27.6058, -82.3456
+[USA0002727] Marshall (NC) | Lake Norman of Catawba, North Carolina, United States of America | Coal | 2119.0 MW | commissioned: 1968.1842850401133 | lat/long: 35.5975, -80.9658
+[USA0006043] Martin | Indiantown, Florida, United States of America | Gas | 4317.499999999999 MW | commissioned: 1991.1434626519979 | lat/long: 27.0536, -80.5628
+[USA0006146] Martin Lake | Tatum, Texas, United States of America | Coal | 2379.600000000001 MW | commissioned: 1977.9999999999993 | lat/long: 32.2606, -94.5706
+[USA0006038] McGuire | Lowesville, North Carolina, United States of America | Nuclear | 2440.6 MW | commissioned: 1982.5 | lat/long: 35.4331, -80.9486
+[USA0000566] Millstone | Niantic, Connecticut, United States of America | Nuclear | 2162.9 MW | commissioned: 1981.793148088215 | lat/long: 41.3107, -72.1677
+[USA0001733] Monroe (MI) | Detroit Beach, Michigan, United States of America | Coal | 3293.0999999999995 MW | commissioned: 1972.7370866356928 | lat/long: 41.8906, -83.3464
+[USA0001588] Mystic Generating Station | Everett, Massachusetts, United States of America | Gas | 2375.6 MW | commissioned: 1995.5244990739184 | lat/long: 42.3908, -71.0675
+[USA0004941] Navajo | LeChee, Arizona, United States of America | Coal | 2409.3 MW | commissioned: 1975.0 | lat/long: 36.9047, -111.3886
+[USA0001403] Nine Mile Point | Jefferson, Louisiana, United States of America | Gas | 2439.7 MW | commissioned: 1983.447514038612 | lat/long: 29.9472, -90.1458
+[USA0003265] Oconee | Utica, South Carolina, United States of America | Nuclear | 2666.7 MW | commissioned: 1974.002474969063 | lat/long: 34.7939, -82.8986
+[USA0002410] PSEG Salem Generating Station | Delaware City, Delaware, United States of America | Nuclear | 2381.8 MW | commissioned: 1978.8596019816946 | lat/long: 39.4625, -75.5358
+[USA0006008] Palo Verde | Buckeye, Arizona, United States of America | Nuclear | 4209.6 MW | commissioned: 1986.6666666666665 | lat/long: 33.3881, -112.8617
+[USA0001378] Paradise | Central City, Kentucky, United States of America | Gas | 2310.2 MW | commissioned: 1993.599688338672 | lat/long: 37.2608, -86.9783
+[USA0003166] Peach Bottom | Susquehanna Trails, Pennsylvania, United States of America | Nuclear | 2784.6 MW | commissioned: 1974.4945054945056 | lat/long: 39.7589, -76.2687
+[USA0000880] Quad Cities Generating Station | Camanche, Iowa, United States of America | Nuclear | 2018.6 MW | commissioned: 1973.0 | lat/long: 41.7261, -90.3103
+[USA0006085] R M Schahfer | Kouts, Indiana, United States of America | Coal | 2201.4 MW | commissioned: 1980.742754610702 | lat/long: 41.2164, -87.0261
+[USA0002500] Ravenswood | Long Island City, New York, United States of America | Gas | 2535.100000000001 MW | commissioned: 1968.9230010650456 | lat/long: 40.7592, -73.9461
+[USA0002693] Robert Moses Niagara | Lewiston, New York, United States of America | Hydro | 2429.100000000001 MW | commissioned: 1961.3982956650607 | lat/long: 43.1427, -79.0394
+[USA0006166] Rockport | Rockport, Indiana, United States of America | Coal | 2600.0 MW | commissioned: 1987.5 | lat/long: 37.9256, -87.0372
+[USA0002712] Roxboro | Roxboro, North Carolina, United States of America | Coal | 2558.2 MW | commissioned: 1972.6309123602537 | lat/long: 36.4833, -79.0731
+[USA0000620] Sanford | DeBary, Florida, United States of America | Gas | 2377.8 MW | commissioned: 1991.1289006644806 | lat/long: 28.8419, -81.3256
+[USA0006257] Scherer | Forsyth, Georgia, United States of America | Coal | 3564.0 MW | commissioned: 1985.5 | lat/long: 33.0606, -83.8075
+[USA0006152] Sequoyah | Lakesite, Tennessee, United States of America | Nuclear | 2441.0 MW | commissioned: 1981.5 | lat/long: 35.2267, -85.0917
+[USA0006090] Sherburne County | Becker, Minnesota, United States of America | Coal | 2469.3 MW | commissioned: 1980.491556311505 | lat/long: 45.3808, -93.8931
+[USA0007805] Sherwood H Smith Jr Energy Complex | Hamlet, North Carolina, United States of America | Gas | 2244.8 MW | commissioned: 2004.2647451888806 | lat/long: 34.8392, -79.7406
+[USA0006251] South Texas Project | Markham, Texas, United States of America | Nuclear | 2708.6 MW | commissioned: 1988.5 | lat/long: 28.795, -96.0481
+[USA0006045] St Lucie | Hutchinson Island South, Florida, United States of America | Nuclear | 2160.0 MW | commissioned: 1979.5 | lat/long: 27.3486, -80.2464
+[USA0006103] TalenEnergy Susquehanna | East Berwick, Pennsylvania, United States of America | Nuclear | 2596.0 MW | commissioned: 1984.0 | lat/long: 41.0919, -76.1462
+[USA0006071] Trimble County | Bedford, Kentucky, United States of America | Coal | 2594.1 MW | commissioned: 2003.106703673721 | lat/long: 38.5847, -85.4117
+[USA0000621] Turkey Point | Leisure City, Florida, United States of America | Nuclear | 2861.2 MW | commissioned: 1987.5449461764292 | lat/long: 25.4356, -80.3308
+[USA0055380] Union Power Station | El Dorado, Arkansas, United States of America | Gas | 2428.0 MW | commissioned: 2003.0 | lat/long: 33.2961, -92.5894
+[USA0006073] Victor J Daniel Jr | Helena, Mississippi, United States of America | Gas | 2229.0 MW | commissioned: 1990.1766711529833 | lat/long: 30.5322, -88.5553
+[USA0000649] Vogtle | Jackson, South Carolina, United States of America | Nuclear | 2320.0 MW | commissioned: 1988.0 | lat/long: 33.1427, -81.7625
+[USA0003470] W A Parish | Greatwood, Texas, United States of America | Coal | 4008.4 MW | commissioned: 1974.7164953597446 | lat/long: 29.4828, -95.6311
+[USA0007722] Watts Bar Nuclear Plant | Decatur, Tennessee, United States of America | Nuclear | 2539.8 MW | commissioned: 2006.0 | lat/long: 35.6021, -84.7895
+[USA0056407] West County Energy Center | Loxahatchee Groves, Florida, United States of America | Gas | 4263.0 MW | commissioned: 2009.666666666667 | lat/long: 26.6986, -80.3747
+```
+
+</details>
+
+1) Direct answer
+- Grand Coulee (Coulee Dam, Washington) — 6,809.0 MW (largest single plant in the U.S. in this dataset).
+
+2) Documents / records cited as evidence
+- [USA0006163] Grand Coulee | Coulee Dam, Washington, United States of America | Hydro | 6809.0 MW | commissioned: 1967.470333382288 | lat/long: 47.9575, -118.9773
+
+3) Relevant documents found but excluded (reason: lower capacity)
+- [USA0003470] W A Parish | Greatwood, Texas | Coal | 4,008.4 MW — excluded because capacity < 6,809.0 MW  
+- [USA0006045] Palo Verde | Buckeye, Arizona | Nuclear | 4,209.6 MW — excluded (lower capacity)  
+- [USA0006043] Martin | Indiantown, Florida | Gas | 4,317.5 MW — excluded (lower capacity)  
+- [USA0056407] West County Energy Center | Loxahatchee Groves, Florida | Gas | 4,263.0 MW — excluded (lower capacity)  
+- [USA0006257] Scherer | Forsyth, Georgia | Coal | 3,564.0 MW — excluded (lower capacity)  
+(These were listed by the same min_capacity_mw >= 2000 MW query and are the top comparators but all have capacities below Grand Coulee.)
+
+4) Confidence note
+- High confidence. The result comes directly from the power plant database query (records returned for min_capacity_mw=2000), and Grand Coulee (USA0006163) is the largest capacity entry returned.
+
+<sub>🔢 38,707 tokens (in: 37,121, out: 1,586)</sub>
+
+user: Have there been any safety incidents in a 2 mile radius from the Grand coulee powerplant?
+
+assistant: <details>
+<summary>Reasoning (1 tool call)</summary>
+
+Thought: I need to check OSHA severe-injury records geographically near Grand Coulee. I have Grand Coulee's coordinates (47.9575, -118.9773) from the plant database, so I'll run a location-based semantic search for any severe work-related injuries/fatalities within a 2-mile radius (broad query terms to capture electrocution, falls, amputations, struck-by, fatalities). I'll call the nearby-incident search with radius_miles=2 and k=25.
+
+---
+
+**Tool call:** `search_severe_injury_near_location(latitude=47.9575, longitude=-118.9773, query='any OSHA severe work-related injury or fatality at or near a hydroelectric power plant (electrocution, fall, amputation, struck-by, fatality)', radius_miles=2, k=25)`
+
+```text
+[2022119659] 1.6 mi away | 11/3/2022 | Bureau of Reclamation-Grand Coulee Dam | GRAND COULEE, WASHINGTON | Amputations | lat/long: 47.94, -119.00 — An employee was grinding a gusset plate with a disc grinder when the gusset got caught, pulling the employee's finger into the machine. The employee sustained an amputation to the right index finger.
+```
+
+</details>
+
+1) Direct answer
+- Yes. OSHA severe-injury records show a documented amputation incident within 2 miles of Grand Coulee Power Plant (Grand Coulee Dam).
+
+2) Evidence (specific record)
+- [2022119659] — Bureau of Reclamation–Grand Coulee Dam | GRAND COULEE, WASHINGTON | 11/03/2022 | Nature: Amputations | Location: lat/long 47.94, -119.00 | Distance: 1.6 miles from Grand Coulee coordinates (47.9575, -118.9773).
+  - Incident summary from the narrative: an employee was grinding a gusset plate with a disc grinder when the gusset got caught, pulling the employee's finger into the machine and resulting in an amputation of the right index finger.
+
+3) Relevant documents found but excluded
+- None. The location-based search (radius = 2 miles, k = 25) returned this single matching OSHA severe-injury record and no additional records within the 2-mile radius to exclude.
+
+4) Confidence note
+- High confidence that at least one OSHA-reportable severe injury (the 11/03/2022 amputation) occurred within 2 miles of Grand Coulee. (This conclusion is drawn directly from the OSHA incident record [2022119659] returned by the geographic semantic search.)
+
+<sub>🔢 40,629 tokens (in: 39,372, out: 1,257)</sub>
+
+user: Based on reportable osha incident that you found can you put together a root cause analyses on what could have caused this safety incident?
+
+assistant: <details>
+<summary>Reasoning (1 tool call)</summary>
+
+Thought: The user explicitly asked for a "root cause" analysis, so I'll run the app's gated 5 Whys root_cause_analysis tool using the OSHA incident narrative as the problem statement to produce a grounded multi-level root-cause report. I'll call root_cause_analysis with a concise problem description drawn from the OSHA record.
+
+---
+
+**Tool call:** `root_cause_analysis(problem="11/03/2022 amputation at Bureau of Reclamation - Grand Coulee Dam: an employee was grinding a gusset plate with a disc grinder when the gusset caught, pulling the employee's finger into the machine and amputating the right index finger.")`
+
+```text
+Problem: 11/03/2022 amputation at Bureau of Reclamation - Grand Coulee Dam: an employee was grinding a gusset plate with a disc grinder when the gusset caught, pulling the employee's finger into the machine and amputating the right index finger.
+
+Why 1: The gusset plate geometry or condition (sharp edge, burr, warped/stressed geometry, or an unsecured/clamped workpiece) caused the grinder’s disc to catch the edge and abruptly pull the operator’s finger into the rotating wheel.
+  Rationale: The incident description says “the gusset caught, pulling the employee’s finger into the machine,” which points to an unexpected bite/ snag from the workpiece itself as the immediate mechanical trigger. The provided safety guideline material (safety_guidelines.pdf p.149) discusses how certain hazards (e.g., gaff cutout) can be ‘pervasive’ and ‘cannot be reliably predicted,’ supporting the plausibility that a workpiece condition or geometry can unexpectedly grab a tool and cause severe injury (p.149: “gaff cutout is pervasive, cannot be reliably predicted, and can lead to death or serious physical harm”). While that quoted guidance discusses different equipment, it supports the plausibility of unpredictable material/tool interactions as a root mechanism. The provided materials do not include grinder-specific fixtures or clamping procedures, so details about securing the gusset in this event are not present in the evidence. (confidence: 0.72)
+Why 2: The gusset plate was not properly secured or clamped during the grinding task, so the plate shifted or presented a protruding edge that the disc could bite into and pull the operator’s finger in.
+  Rationale: OSHA guidance emphasizes assessing whether an operation includes parts that move or slide during servicing or maintenance and using appropriate controls for those exposures (safety_guidelines.pdf, p. 626: "Whether the operation of electric equipment with sliding parts ... is part of the normal operation of the equipment or occurs during servicing or maintenance"). Analogous machinery guidance (NIOSH/OSHA discussion of chippers) highlights that being caught by feed mechanisms is a known hazard and recommends controls such as ensuring correct work practices and removing entanglement risks (safety_guidelines.pdf, p. 122). Together these passages support the plausibility that a failure to secure the workpiece (allowing unexpected movement or an exposed burr/edge) would create the described catch condition. (confidence: 0.82)
+Why 3: No appropriate clamp/fixture was available at the work location (or the available fixture was effectively unusable while wearing required PPE), so the employee either hand‑held or improvised support for the gusset and could not securely restrain the part while grinding.
+  Rationale: OSHA guidance notes that certain protective equipment (rubber insulating gloves with leather protectors) limits dexterity when operating connectors and keepers, and that devices which are difficult to operate while wearing gloves interfere with safe work rhythms ([safety_guidelines.pdf, page 137]). By analogy, if the available vice/clamp was awkward or required fine dexterity to operate while wearing gloves, the employee might have been unable or unwilling to use it and instead held the gusset by hand or used an unstable improvised hold. The guidance about gloves also warns that gloves/sleeves can be caught or pulled by protruding objects ([safety_guidelines.pdf, page 232]), which could make an employee avoid certain clamping maneuvers or increase difficulty securing odd‑shaped parts. This explanation is directly supported by the cited text about reduced dexterity and catching hazards while wearing required PPE. (confidence: 0.75)
+Why 4: A clamp or fixture was present but was degraded, damaged, or had nonfunctioning components (e.g., loose/damaged mountings, worn parts), so it could not securely hold the gusset and was effectively unusable.
+  Rationale: This is supported by the guidance describing how worn or nonfunctioning hardware can render equipment ineffective: safety_guidelines.pdf, page 141 lists examples of degraded components — “distorted hooks or faulty hook springs; tongues unfitted to the shoulder of buckles; loose or damaged mountings; nonfunctioning parts; or wearing or internal deterioration in the ropes.” By analogy, a visibly worn or damaged clamp/fixture would not restrain the workpiece, forcing the worker to hold or improvise support. This mechanism directly explains why a clamp would be unavailable in practice even if present on site. (confidence: 0.90)
+Why 5: Pre‑use inspections were not performed or were ineffective, so a visibly damaged or nonfunctioning clamp remained in service and was used during grinding.
+  Rationale: The OSHA guidance requires that personal protective/anchorage equipment be “inspected prior to each use for wear, damage and other deterioration, and defective components shall be removed from service” ([safety_guidelines.pdf, page 141]). Appendix C examples explicitly call out defects that require removal from service, including “loose or damaged mountings; nonfunctioning parts” ([safety_guidelines.pdf, page 141]). If those inspections did not occur or did not identify the defective clamp, a degraded fixture could remain available and be used during the task, explaining why a present clamp was effectively unusable. (confidence: 0.85)
+
+Root Cause: Pre‑use inspections were not performed or were ineffective, so a visibly damaged or nonfunctioning clamp remained in service and was used during grinding.
+Overall path confidence: 0.339
+```
+
+</details>
+
+1) Direct answer
+- I ran a 5 Whys root‑cause analysis on the OSHA incident you asked about (11/03/2022 amputation at Bureau of Reclamation — Grand Coulee Dam). The analysis identifies the most likely root cause chain as: inadequate or ineffective pre‑use inspections allowed a degraded or nonfunctional clamp/fixture to remain available, leading to the workpiece being unsecured during grinding, which allowed the gusset to catch the grinder disc and pull the worker’s finger into the wheel, resulting in amputation.
+
+2) Documents / records cited as evidence
+- OSHA incident report narrative: [2022119659] — Bureau of Reclamation–Grand Coulee Dam | GRAND COULEE, WASHINGTON | 11/03/2022 | Amputations (incident summary included in the problem statement).
+- Safety guideline excerpts used during analysis (semantic lookups from the guideline corpus; specific pages referenced in the 5 Whys tool output):
+  - safety_guidelines.pdf, p. 149 (discussion of unpredictable “gaff cutout” hazards and severe consequences).
+  - safety_guidelines.pdf, p. 122 (discussion of caught‑by hazards and controls for parts that move/slide during maintenance).
+  - safety_guidelines.pdf, p. 137 (discussion of glove dexterity and interaction with fixtures).
+  - safety_guidelines.pdf, p. 141 (inspection requirements and examples of worn/damaged components requiring removal from service).
+  - safety_guidelines.pdf, p. 232 (discussion of gloves/sleeves catching hazards).
+  (These guideline chunks were retrieved internally by the root_cause_analysis tool while generating each why; the tool output referenced them.)
+
+3) Relevant documents found but excluded
+- No additional OSHA incidents within 2 miles were returned by the location search, so no other incident records were reviewed or excluded from the root‑cause analysis. No specific inspection or maintenance records from the Bureau of Reclamation were available in the dataset; such plant-specific maintenance or tool‑use records would be useful but were not present in the evidence set.
+
+4) Confidence note
+- Medium confidence in the root cause chain identified. The analysis was produced by the app’s 5 Whys root_cause_analysis tool and is grounded in:
+  - the OSHA incident narrative describing the disc grinder biting the gusset and amputating the finger, and
+  - relevant safety guideline excerpts that support mechanisms like unsecured workpieces, degraded fixtures, and lack of inspections.
+- However, this chain is based on plausible mechanisms supported by guidelines and the incident narrative, not on direct plant records (e.g., inspection logs, equipment condition reports, witness statements, or procedures used at Grand Coulee). Without those site‑specific documents, the analysis cannot definitively prove which of the plausible causes actually occurred, hence medium confidence.
+
+If you want, I can:
+- Run a focused evidence search for any plant-specific maintenance/inspection records in the dataset (if available), or
+- Produce a concise corrective action plan mapped to each why (e.g., inspection checklist, clamp/fixture selection, tool guarding, workholding training, and PPE considerations) to mitigate recurrence. Which would you prefer?
+
+<sub>🔢 42,676 tokens (in: 41,612, out: 1,064)</sub>
